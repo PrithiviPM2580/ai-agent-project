@@ -12,10 +12,14 @@
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
   "dependencies": {
+    "@langchain/classic": "^1.0.3",
     "@langchain/community": "^1.0.3",
     "@langchain/core": "^1.0.5",
+    "@langchain/google-genai": "^1.0.1",
+    "@langchain/textsplitters": "^1.0.0",
+    "dotenv": "^17.2.3",
     "langchain": "^1.0.4",
-    "pdf-parse": "^2.4.5"
+    "pdf-parse": "^1.1.4"
   },
   "devDependencies": {
     "@types/node": "^24.10.1",

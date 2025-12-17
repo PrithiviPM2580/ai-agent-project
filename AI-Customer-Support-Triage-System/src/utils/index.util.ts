@@ -47,18 +47,21 @@ export function missingInfoPrompt(
   state: typeof StateAnnotation.State
 ): string {
   return `
-Check if important information is missing.
+You are a customer support triage assistant.
+
+Based on the summary below, decide if a human support agent
+can proceed WITHOUT asking the customer any follow-up questions.
 
 Summary:
 "${state.summary}"
 
-Rules (VERY IMPORTANT):
-- If no information is missing → return exactly: "none"
-- If information is missing → return ONLY a short description
-- Do NOT return explanations
-- Do NOT return JSON code fences
+Rules:
+- If NO follow-up question is required → return "none"
+- If a follow-up question IS required → return a short description of what is missing
+- Return ONLY the value, no explanations
 `;
 }
+
 
 
 

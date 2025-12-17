@@ -30,7 +30,7 @@ const builder = new StateGraph(StateAnnotation)
 
 const graph = builder.compile();
 
-const query = "Can you help me reset my password? I forgot my current one and need to access my account.";
+const query = "I can’t log in to my account. Please fix this.";
 console.log("User Query:", query);
 
 const result = await graph.invoke({

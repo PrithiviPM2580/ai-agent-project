@@ -19,6 +19,10 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "@langchain/core": "^1.1.6",
+    "@langchain/google-genai": "^2.1.1",
+    "@langchain/langgraph": "^1.0.5",
+    "dotenv": "^17.2.3",
+    "zod": "^3.25.76"
   }
 }

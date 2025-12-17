@@ -6,14 +6,24 @@ import classifierNode from "./nodes/classifierAgent.node.js";
 import priorityNode from "./nodes/priorityAgent.node.js";
 import missingInfoNode from "./nodes/missingInfoAgent.node.js";
 import routerNode from "./nodes/routerAgent.node.js";
+import spamCheckNode from "./nodes/spamCheckAgent.node.js";
 
 const builder = new StateGraph(StateAnnotation)
+    .addNode("spamCheckNode", spamCheckNode)
     .addNode("readerNode", readerNode)
     .addNode("classifierNode", classifierNode)
     .addNode("priorityNode", priorityNode)
     .addNode("missingInfoNode", missingInfoNode)
     .addNode("routerNode", routerNode)
-    .addEdge(START, "readerNode")
+    .addEdge(START, "spamCheckNode")
+    .addConditionalEdges("spamCheckNode",(state)=>{
+        if(state.isSpam){
+            console.log("Message identified as spam of type:", state.spamType);
+            return END
+        };
+        console.log("Message is not spam. Proceeding with analysis.");
+        return "readerNode";
+    })
     .addEdge("readerNode", "classifierNode")
     .addEdge("classifierNode", "priorityNode")
     .addEdge("priorityNode", "missingInfoNode")

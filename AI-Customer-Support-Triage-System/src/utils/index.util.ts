@@ -60,6 +60,22 @@ Rules:
 - If a follow-up question IS required → return a short description of what is missing
 - Return ONLY the value, no explanations
 `;
+};
+
+
+export function spamCheckPrompt(state: typeof StateAnnotation.State): string {
+  return `
+  You are a spam detection system.
+
+  Message:
+  "${state.originalMessage}"
+  
+  Decide if this message is:
+  - Spam (ads, promotions)
+  - Scam (fraud, phishing)
+  - Abuse (threats, harassment)
+  - Legitimate
+  `;
 }
 
 

@@ -1,1 +1,0 @@
-console.log("AI Knowledge Assistant is running...");

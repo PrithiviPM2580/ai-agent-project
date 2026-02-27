@@ -1,4 +1,6 @@
-# Process
+# Customer Support Agent Process
+
+## Process
 
 The agent should:
 
@@ -9,10 +11,21 @@ The agent should:
 - Escalate complex issues to human agents
 - Schedule follow-ups when needed
 
-Example scenarios to handle:
+## Example Scenarios to Handle
 
-1. Simple product question: "How do I reset my password?"
-2. Bug report: "The export feature crashes when I select PDF format"
-3. Urgent billing issue: "I was charged twice for my subscription!"
-4. Feature request: "Can you add dark mode to the mobile app?"
-5. Complex technical issue: "Our API integration fails intermittently with 504 errors"
+1. **Simple product question**: "How do I reset my password?"
+2. **Bug report**: "The export feature crashes when I select PDF format"
+3. **Urgent billing issue**: "I was charged twice for my subscription!"
+4. **Feature request**: "Can you add dark mode to the mobile app?"
+5. **Complex technical issue**: "Our API integration fails intermittently with 504 errors"
+
+## Flowchart
+
+```Mermaid
+flowchart TD
+    START --> classifyIntent
+    classifyIntent -->|simple question| draftResponse
+    classifyIntent -->|high urgency/billing| humanReview
+    draftResponse --> END
+    humanReview --> END
+```

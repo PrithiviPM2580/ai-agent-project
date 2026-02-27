@@ -7,8 +7,8 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 //Model
 const llm = new ChatGoogleGenerativeAI({
   temperature: 0.4,
-  apiKey: process.env.GOOGLE_API_KEY!,
-  model: "gemini-2.5-pro",
+  apiKey: process.env.GEMINI_API_KEY!,
+  model: "gemini-2.5-flash",
 });
 
 // Nodes
@@ -28,11 +28,36 @@ export const classifyIntent: GraphNode<typeof EmailAgentState> = async (
     `;
   const classification = await structuredLlm.invoke(prompt);
 
+  let nextNode: string;
+
+  if (
+    classification.intent === "billing" ||
+    classification.urgency === "high" ||
+    classification.urgency === "critical"
+  ) {
+    nextNode = "humanReview";
+  } else {
+    nextNode = "draftResponse";
+  }
+
+  console.log("Classification:", classification);
+  console.log("Routing to:", nextNode);
+
   return new Command({
     update: { classification },
-    goto: "draftResponse",
+    goto: nextNode,
   });
 };
+
+export async function humanReview(state: any) {
+  console.log("\n⚠️ HUMAN REVIEW REQUIRED ⚠️\n");
+  console.log("Email:", state.emailContent);
+  console.log("Draft:", state.responseText);
+
+  return {
+    responseText: "This case has been escalated to our billing team.",
+  };
+}
 
 export const draftResponse: GraphNode<typeof EmailAgentState> = async (
   state,

@@ -111,15 +111,15 @@ const assignWorkers = (state: MainState) => {
 //   };
 // };
 
-// const synthesizer: GraphNode<typeof State> = async (state) => {
-//   const completedSections = state.completedSections;
+const synthesizer: GraphNode<typeof State> = async (state) => {
+  const completedSections = state.completedSections;
 
-//   const completedReportSections = completedSections.join("\n\n---\n\n");
+  const completedReportSections = completedSections.join("\n\n---\n\n");
 
-//   return {
-//     finalReport: completedReportSections,
-//   };
-// };
+  return {
+    finalReport: completedReportSections,
+  };
+};
 
 // const assignWorkers: ConditionalEdgeRouter<typeof State, "llmCall"> = async (
 //   state,
@@ -133,13 +133,15 @@ const assignWorkers = (state: MainState) => {
 const orchestratorGraph = new StateGraph(State)
   .addNode("orchestrator", orchestrationNode)
   .addNode("llmCall", llmCall)
+  .addNode("synthesizer", synthesizer)
   .addEdge(START, "orchestrator")
   .addConditionalEdges("orchestrator", assignWorkers, ["llmCall"])
-  .addEdge("llmCall", END)
+  .addEdge("llmCall", "synthesizer")
+  .addEdge("synthesizer", END)
   .compile();
 
 const state = await orchestratorGraph.invoke({
   topic: "Create a report on LLM scaling laws",
 });
 
-console.log("Final Report: ", state.completedSections);
+console.log("Final Report: ", state.finalReport);

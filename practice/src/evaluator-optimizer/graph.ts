@@ -85,3 +85,4 @@ const workflow = new StateGraph(State)
 //Run workflow
 const result = await workflow.invoke({ topic: "programming" });
 console.log("Final Result:", result);
+console.log("Joke: ", result.joke);

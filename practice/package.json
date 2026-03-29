@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.ts",
   "scripts": {
-    "dev": "tsx src/index.ts"
+    "dev": "tsx index.ts",
+    "dev:practice": "tsx src/practice/index.ts"
   },
   "keywords": [],
   "author": "",

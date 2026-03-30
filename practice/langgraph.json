@@ -1,0 +1,7 @@
+{
+  "node_version": "22",
+  "graphs": {
+    "app": "./src/practice/agent.ts:app"
+  },
+  "env": ".env"
+}

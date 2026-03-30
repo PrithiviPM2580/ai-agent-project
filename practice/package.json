@@ -6,13 +6,16 @@
   "main": "index.ts",
   "scripts": {
     "dev": "tsx index.ts",
-    "dev:practice": "tsx src/practice/index.ts"
+    "dev:practice": "tsx src/practice/index.ts",
+    "dev:langgraph": "langgraphjs dev",
+    "dev:langgraph:watch": "langgraphjs dev --port 2025"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.20.0",
   "devDependencies": {
+    "@langchain/langgraph-cli": "^1.1.17",
     "@types/node": "^24.10.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",

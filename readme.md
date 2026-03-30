@@ -21,3 +21,5 @@ Selection Tips
 Reach for gemini-2.5-pro when accuracy and reasoning beat latency concerns.
 Default to gemini-2.5-flash if you need reliable speed without sacrificing too much quality.
 Try the preview or lite variants only when you can tolerate experimental behavior or shallower reasoning.
+
+<!-- pkill -f langgraphjs -->
